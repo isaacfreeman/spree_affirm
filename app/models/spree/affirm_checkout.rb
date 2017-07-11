@@ -11,6 +11,10 @@ module Spree
       "Affirm Checkout"
     end
 
+    def reusable?
+      false
+    end
+
     def details
       @details ||= payment_method.provider.get_checkout token
     end
