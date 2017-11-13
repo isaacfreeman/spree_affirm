@@ -25,16 +25,16 @@
       tax_amount:           <%= (@order.additional_tax_total * 100).to_i %>,
       checkout_id:          "<%= @order.number %>",
       discount_code:        "<%= @order.coupon_code %>",
-      shipping_type:        "<%= @order.shipments.first.shipping_method.name if @order.shipments %>",
+      shipping_type:        "<%= j @order.shipments.first.shipping_method.name if @order.shipments %>",
       shipping_amount:      <%= (@order.shipment_total * 100).to_i %>,
 
       shipping: {
         name: {
-          full:  "<%= @order.ship_address.full_name %>",
+          full:  "<%= j @order.ship_address.full_name %>",
         },
         address: {
-          line1:        "<%= @order.ship_address.address1 %>",
-          line2:        "<%= @order.ship_address.address2 %>",
+          line1:        "<%= j @order.ship_address.address1 %>",
+          line2:        "<%= j @order.ship_address.address2 %>",
           city:         "<%= @order.ship_address.city %>",
           state:        "<%= @order.ship_address.state_text %>",
           country:      "<%= @order.ship_address.country.iso %>",
@@ -45,11 +45,11 @@
       billing: {
         email: "<%= @order.email %>",
         name: {
-          full:   "<%= @order.bill_address.full_name %>"
+          full:   "<%= j @order.bill_address.full_name %>"
         },
         address: {
-          line1:          "<%= @order.bill_address.address1 %>",
-          line2:          "<%= @order.bill_address.address2 %>",
+          line1:          "<%= j @order.bill_address.address1 %>",
+          line2:          "<%= j @order.bill_address.address2 %>",
           city:           "<%= @order.bill_address.city %>",
           state:          "<%= @order.bill_address.state_text %>",
           country:        "<%= @order.bill_address.country.iso %>",
@@ -91,9 +91,9 @@
       <% if @order.promotions.any? %>
       discounts: {
         <% @order.adjustments.promotion.each do |adjustment| %>
-          "<%= adjustment.label %>": {
+          "<%= j adjustment.label %>": {
             discount_amount:       <%= (0-adjustment.amount*100).to_i %>,
-            discount_display_name: "<%= adjustment.label %>"
+            discount_display_name: "<%= j adjustment.label %>"
           },
         <% end %>
       },
@@ -112,7 +112,7 @@
           sku:           "<%= item.variant.sku %>",
           item_url:      "<%= product_url(item.product) %>",
           unit_price:    <%= item.price * 100 %>,
-          display_name:  "<%= raw(item.variant.product.name) %>"
+          display_name:  "<%= j raw(item.variant.product.name) %>"
         },
         <% end %>
       ]
