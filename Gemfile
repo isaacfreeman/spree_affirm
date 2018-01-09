@@ -1,6 +1,11 @@
 source 'https://rubygems.org'
 
-gem 'solidus'
+gem 'solidus_api'
+gem 'solidus_backend'
+gem 'solidus_core'
+gem 'solidus_frontend'
+gem 'solidus_sample'
+
 gem 'solidus_gateway'
 gem 'solidus_auth_devise'
 
